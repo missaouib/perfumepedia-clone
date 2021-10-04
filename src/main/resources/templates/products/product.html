@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: https://1.envato.market/EA4JP
+Renew Support: https://1.envato.market/EA4JP
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--begin::Head-->
+<head th:fragment="headerfiles">
+  <!--/*/ <th:block th:insert="fragments/headfiles.html :: headfiles">
+  </th:block> /*/-->
+</head>
+<!--end::Head-->
+
+<!--begin::Body-->
+<body  id="kt_body"  class="header-fixed header-mobile-fixed page-loading"  >
+    <div th:text="${userVoteProduct != null } ? (${userVoteProduct.idislike} ? 'zaznaczone' : 'niezaznaczone') : 'brak'"></div>
+
+    <!--begin::Main-->
+    <!--begin::Header Mobile-->
+    <div id="kt_header_mobile" class="header-mobile bg-primary  header-mobile-fixed " >
+        <!--begin::Logo-->
+        <a href="index.html"><img alt="Logo" src="/assets/media/logos/logo-letter-9.png" class="max-h-30px"/></a>
+        <!--end::Logo-->
+        <div id="idproduct" class="d-none" th:text="${product.idProduct}"></div>
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <button class="btn p-0 burger-icon burger-icon-left ml-4" id="kt_header_mobile_toggle"><span></span></button>
+            <button class="btn p-0 ml-2" id="kt_header_mobile_topbar_toggle">
+                <span class="svg-icon svg-icon-xl">
+                <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <polygon points="0 0 24 0 24 24 0 24"/>
+                    <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                    <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                </g>
+                </svg>
+                <!--end::Svg Icon-->
+                </span>
+            </button>
+        </div>
+        <!--end::Toolbar-->
+    </div>
+    <!--end::Header Mobile-->
+
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="d-flex flex-row flex-column-fluid page">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+
+                <!--begin::Header-->
+                <div th:insert="fragments/header.html :: header"></div>
+                <!--end::Header-->
+
+                <!--begin::Content-->
+                <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+                    <!--begin::Subheader-->
+                    <div th:insert="fragments/subheader.html :: subheader"></div>
+                    <!--end::Subheader-->
+
+                    <!--begin::Entry-->
+                    <div class="d-flex flex-column-fluid">
+                        <!--begin::Container-->
+                        <div class=" container ">
+                            <!--begin love,like,dislike,I have, I had, I want-->
+
+                            <!--begin message vote -->
+                            <div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert"  style="display: none;">
+                                Dziękujemy za oddanie głosu na <strong th:text="${product.productName}"></strong>.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--end message vote -->
+
+                            <!--begin message error vote -->
+                            <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert"  style="display: none;">
+                                Zaloguj się aby oddać głos.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--end message error vote -->
+
+                            <div id="love-like-element" class="row">
+
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 26-->
+                                    <div class="card bg-light-danger">
+                                        <!--begin::ody-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-danger svg-icon-2x">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                <path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero"/>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-danger">
+                                                        <label>
+                                                            <input type="radio" name="loveradio" value="love" th:checked="${userVoteProduct != null} ? (${userVoteProduct.ilove} ? true : false) : false">
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h6 mb-0 mt-0 d-block">Kocham</span>
+                                            <span class="font-weight-bold font-size-sm"><span id="ilovequantity" th:text="${voteProduct.getIlove != null ? voteProduct.getIlove : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 26-->
+                                </div>
+
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 28-->
+                                    <div class="card card-custom bg-light-danger card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-danger svg-icon-2x">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000"/>
+                                                                <rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1"/>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-danger">
+                                                        <label>
+                                                            <input type="radio" name="loveradio" value="like" th:checked="${userVoteProduct != null } ? (${userVoteProduct.ilike} ? true : false) : false">
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h6 mb-0 mt-0 d-block">Lubię</span>
+                                            <span class="font-weight-bold font-size-sm"><span id="ilikequantity" th:text="${voteProduct.getIlike != null ? voteProduct.getIlike : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stat: Widget 28-->
+                                </div>
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 28-->
+                                    <div class="card card-custom bg-light-danger card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="#000000">
+                                                                    <rect x="0" y="7" width="16" height="2" rx="1"/>
+                                                                    <rect opacity="0.3" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) " x="0" y="7" width="16" height="2" rx="1"/>
+                                                                </g>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-danger">
+                                                        <label>
+                                                            <input type="radio" name="loveradio" value="dislike" th:checked="${userVoteProduct != null } ? (${userVoteProduct.idislike} ? true : false) : false">
+                                                            <span></span>
+                                                        </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h6 mb-0 mt-0 d-block">Nie lubię</span>
+                                            <span class="font-weight-bold font-size-sm"><span id="idislikequantity" th:text="${voteProduct.getIdislike != null ? voteProduct.getIdislike : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stat: Widget 28-->
+                                </div>
+
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 26-->
+                                    <div class="card card-custom bg-light-warning card-stretch gutter-b">
+                                        <!--begin::ody-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-warning">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                                                <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                                                <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-warning">
+                                                        <label><input type="checkbox" name="have" value="ihave"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h0 mb-0 mt-0 d-block">Mam</span>
+                                            <span class="font-weight-bold font-size-sm"><span th:text="${voteProduct.getIhave != null ? voteProduct.getIhave : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 26-->
+                                </div>
+
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 28-->
+                                    <div class="card card-custom bg-light-warning card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-warning">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"></path>
+                                                                <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-warning">
+                                                        <label><input type="checkbox" name="have" value="iwant"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h6 mb-0 mt-0 d-block">Chcę mieć</span>
+                                            <span class="font-weight-bold text-dark font-size-ml"><span th:text="${voteProduct.getIwant != null ? voteProduct.getIwant : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stat: Widget 28-->
+                                </div>
+
+                                <div class="col-md-2">
+                                    <!--begin::Stats Widget 28-->
+                                    <div class="card card-custom bg-light-warning card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-warning">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M16,15.6315789 L16,12 C16,10.3431458 14.6568542,9 13,9 L6.16183229,9 L6.16183229,5.52631579 C6.16183229,4.13107011 7.29290239,3 8.68814808,3 L20.4776218,3 C21.8728674,3 23.0039375,4.13107011 23.0039375,5.52631579 L23.0039375,13.1052632 L23.0206157,17.786793 C23.0215995,18.0629336 22.7985408,18.2875874 22.5224001,18.2885711 C22.3891754,18.2890457 22.2612702,18.2363324 22.1670655,18.1421277 L19.6565168,15.6315789 L16,15.6315789 Z" fill="#000000"></path>
+                                                                <path d="M1.98505595,18 L1.98505595,13 C1.98505595,11.8954305 2.88048645,11 3.98505595,11 L11.9850559,11 C13.0896254,11 13.9850559,11.8954305 13.9850559,13 L13.9850559,18 C13.9850559,19.1045695 13.0896254,20 11.9850559,20 L4.10078614,20 L2.85693427,21.1905292 C2.65744295,21.3814685 2.34093638,21.3745358 2.14999706,21.1750444 C2.06092565,21.0819836 2.01120804,20.958136 2.01120804,20.8293182 L2.01120804,18.32426 C1.99400175,18.2187196 1.98505595,18.1104045 1.98505595,18 Z M6.5,14 C6.22385763,14 6,14.2238576 6,14.5 C6,14.7761424 6.22385763,15 6.5,15 L11.5,15 C11.7761424,15 12,14.7761424 12,14.5 C12,14.2238576 11.7761424,14 11.5,14 L6.5,14 Z M9.5,16 C9.22385763,16 9,16.2238576 9,16.5 C9,16.7761424 9.22385763,17 9.5,17 L11.5,17 C11.7761424,17 12,16.7761424 12,16.5 C12,16.2238576 11.7761424,16 11.5,16 L9.5,16 Z" fill="#000000" opacity="0.3"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-warning">
+                                                        <label><input type="checkbox" name="have" value="ihad"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h6 mb-0 mt-0 d-block">Miałem</span>
+                                            <span class="font-weight-bold text-dark font-size-sm"><span th:text="${voteProduct.getIhad != null ? voteProduct.getIhad : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stat: Widget 28-->
+                                </div>
+
+                            </div>
+                            <!--end love,like,dislike,I have, I had, I want-->
+
+                            <!--begin Info Product -->
+                            <div id="info-product" class="row">
+                                <div class="col-xl-4">
+                                    <!--begin::Nav Panel Widget 3-->
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex justify-content-between flex-column h-100">
+                                                <!--begin::Container-->
+                                                <div class="h-100">
+                                                    <!--begin::Header-->
+                                                    <div class="d-flex flex-column flex-center">
+                                                        <!--begin::Image-->
+                                                        <div class="bgi-no-repeat bgi-size-cover rounded">
+                                                            <img th:title="${product.productName}" th:alt="${image.altImage}" class="img-fluid" th:src="@{'/assets/img/products/' + ${image.urlImage != null ? image.urlImage : 'nophoto.png'}}"></div>
+                                                        <!--end::Image-->
+                                                    </div>
+                                                    <!--end::Header-->
+
+                                                    <!--begin::Body-->
+                                                    <div class="pt-1">
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                                <path d="M13,5 L15,5 L15,20 L13,20 L13,5 Z M5,5 L5,20 L3,20 C2.44771525,20 2,19.5522847 2,19 L2,6 C2,5.44771525 2.44771525,5 3,5 L5,5 Z M16,5 L18,5 L18,20 L16,20 L16,5 Z M20,5 L21,5 C21.5522847,5 22,5.44771525 22,6 L22,19 C22,19.5522847 21.5522847,20 21,20 L20,20 L20,5 Z" fill="#000000"/>
+                                                                                <polygon fill="#000000" opacity="0.3" points="9 5 9 20 7 20 7 5"/>
+                                                                            </g>
+                                                                        </svg><!--end::Svg Icon-->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+
+                                                            <!--begin::Text-->
+                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Marka</a>
+                                                                <span class="text-muted font-weight-bold" th:text="${product.brand.nameBrand}"></span>
+                                                            </div>
+                                                            <!--end::Text-->
+                                                        </div>
+                                                        <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                                <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                                                <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                                                            </g>
+                                                                        </svg><!--end::Svg Icon-->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+
+                                                            <!--begin::Text-->
+                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Autor</a>
+                                                                <span class="text-muted font-weight-bold" th:text="${product.author.authorName}"></span>
+                                                            </div>
+                                                            <!--end::Text-->
+                                                        </div>
+                                                        <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo7\dist/../src/media/svg/icons\Food\Cake.svg-->
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                                <path d="M13,11 L17,11 C19.0758626,11 20.7823939,12.5812954 20.980747,14.6050394 L20.2928932,15.2928932 C19.1327768,16.4530096 18.0387961,17 17,17 C16.5220296,17 16.1880664,16.8518214 15.5648598,16.401988 C15.504386,16.3583378 15.425236,16.3005045 15.2756717,16.1912639 C14.1361881,15.3625486 13.3053476,15 12,15 C10.7177731,15 9.87894492,15.3373247 8.58005831,16.1531954 C8.42732855,16.2493619 8.35077622,16.2975179 8.28137728,16.3407226 C7.49918122,16.8276828 7.06530257,17 6.5,17 C5.8272085,17 5.18146841,16.7171497 4.58539107,16.2273674 C4.21125802,15.9199514 3.94722374,15.6135435 3.82536894,15.4354062 C3.58523105,15.132389 3.4977165,15.0219591 3.03793571,14.4468552 C3.3073102,12.4994956 4.97854212,11 7,11 L11,11 L11,9 L13,9 L13,11 Z" fill="#000000"/>
+                                                                                <path d="M12,7 C13.1045695,7 14,6.1045695 14,5 C14,4.26362033 13.3333333,3.26362033 12,2 C10.6666667,3.26362033 10,4.26362033 10,5 C10,6.1045695 10.8954305,7 12,7 Z" fill="#000000" opacity="0.3"/>
+                                                                                <path d="M21,17.3570374 L21,21 C21,21.5522847 20.5522847,22 20,22 L4,22 C3.44771525,22 3,21.5522847 3,21 L3,17.4976746 C3.098145,17.5882704 3.2035241,17.6804734 3.31568417,17.7726326 C4.24088818,18.5328503 5.30737928,19 6.5,19 C7.52608715,19 8.26628185,18.7060277 9.33838848,18.0385822 C9.41243034,17.9924871 9.49377318,17.9413176 9.64386645,17.8468046 C10.6511414,17.2141042 11.1835561,17 12,17 C12.7988191,17 13.2700619,17.2056332 14.0993283,17.8087361 C14.2431314,17.9137812 14.3282387,17.9759674 14.3943239,18.0236679 C15.3273176,18.697107 16.0099741,19 17,19 C18.3748985,19 19.7104312,18.4390637 21,17.3570374 Z" fill="#000000" opacity="0.3"/>
+                                                                            </g>
+                                                                        </svg><!--end::Svg Icon-->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+
+                                                            <!--begin::Text-->
+                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Data premiery</a>
+                                                                <span class="text-muted font-weight-bold" th:text="${#dates.format(product.creationDate, 'yyyy')}"></span>
+                                                            </div>
+                                                            <!--end::Text-->
+
+                                                        </div>
+                                                        <!--end::Item-->
+
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                                <path d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                                                <path d="M12,19.5 C6,16 3,12.6834696 3,9.55040872 C3,6.72217984 4.651,4.5 7.5,4.5 C9.1095,4.5 10.99175,6.32463215 12,7.5 L12,19.5 Z" fill="#000000" fill-rule="nonzero"/>
+                                                                            </g>
+                                                                        </svg><!--end::Svg Icon-->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+
+                                                            <!--begin::Text-->
+                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Płeć</a>
+                                                                <span class="text-muted font-weight-bold" th:text="${sex}"></span>
+                                                            </div>
+                                                            <!--end::Text-->
+
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                                <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5"/>
+                                                                                <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3"/>
+                                                                            </g>
+                                                                        </svg><!--end::Svg Icon-->
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+
+                                                            <!--begin::Text-->
+                                                            <div class="d-flex flex-column flex-grow-1">
+                                                                <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Rodzaj zapachu</a>
+                                                                <span class="text-muted font-weight-bold" th:text="${product.type.nameType}">woda toaletowa</span>
+                                                            </div>
+                                                            <!--end::Text-->
+
+                                                        </div>
+                                                        <!--end::Item-->
+                                                    </div>
+                                                    <!--end::Body-->
+                                                </div>
+                                                <!--eng::Container-->
+
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Nav Panel Widget 3-->
+                                </div>
+                                <div class="col-xl-8">
+
+                                    <!--begin::Engage Widget 14-->
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <div class="card-body p-15 pb-20">
+                                            <div class="row mb-10">
+
+                                                <div class="col-xxl-12 pl-xxl-12">
+                                                    <h2 class="font-weight-bolder text-dark mb-1" style="font-size: 32px;" th:text="${product.brand.nameBrand + ' ' + product.productName}"></h2>
+                                                    <div class="font-size-h2 mb-3 text-dark-50" th:text="${product.type.nameType + ' (' + product.type.shortType + ')'}"></div>
+                                                    <hr>
+                                                    <p><span th:utext="${averageScore}"></span>(<span th:text="${score == null ? 0 : score}"></span>)</p>
+                                                    <hr>
+                                                    <div class="line-height-xl" th:text="${product.description}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+
+                                                <!--begin::Body-->
+                                                <div class="card-body pt-0 pb-3">
+                                                    <div class="tab-content">
+                                                        <!--begin::Table-->
+                                                        <div class="table-responsive">
+                                                            <table class="table table-head-custom table-vertical-center table-head-bg table-borderless">
+                                                                <thead>
+                                                                <tr class="text-left">
+                                                                    <th style="min-width: 250px" class="pl-7"><span class="text-dark-75">Dostępne pojemność</span></th>
+                                                                    <th style="min-width: 100px">Cena</th>
+                                                                    <th style="min-width: 100px">EAN</th>
+                                                                    <th style="min-width: 100px"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr th:each="capacity : ${product.capacityList}">
+                                                                    <td class="pl-7 py-8">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div>
+                                                                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg" th:text="${capacity.capacityValue + 'ml'}"></a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">N/A</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg" th:text="${capacity.ean}"></span>
+                                                                    </td>
+                                                                    <td class="pr-0 text-right">
+                                                                        <a href="#" class="btn btn-light-success font-weight-bolder font-size-sm">Zobacz oferty</a>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Table-->
+                                                    </div>
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Engage Widget 14-->
+                                </div>
+                            </div>
+                            <!--end Info Product -->
+
+                            <!--begin spring, summer, autumn, winter -->
+                            <div id="seasons-element" class="row">
+                                <div class="col-xl-3">
+                                    <!--begin::Stats Widget 29-->
+                                    <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right; background-size: 100% auto; background-image: url(/assets/media/stock-600x400/img-12.jpg)">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-dark">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"></path>
+                                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="season" value="spring"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-2 d-block">Na wiosnę</span>
+                                            <span class="font-weight-bold font-size-sm font-size-h7"><span th:text="${voteProduct.getSpring != null ? voteProduct.getSpring : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 29-->
+                                </div>
+
+                                <div class="col-xl-3">
+                                    <!--begin::Stats Widget 29-->
+                                    <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right; background-size: 100% auto; background-image: url(/assets/media/stock-600x400/img-11.jpg)">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"></path>
+                                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="season" value="summer"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-2 d-block">Na lato</span>
+                                            <span class="font-weight-bold text-white font-size-sm font-size-h7"><span th:text="${voteProduct.getSummer != null ? voteProduct.getSummer : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 29-->
+                                </div>
+
+                                <div class="col-xl-3">
+                                    <!--begin::Stats Widget 29-->
+                                    <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right; background-size: 100% auto; background-image: url(/assets/media/stock-600x400/img-5.jpg)">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-dark">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"></path>
+                                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="season" value="autumn"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-2 d-block">Na jesień</span>
+                                            <span class="font-weight-bold font-size-sm font-size-h7"><span th:text="${voteProduct.getAutumn != null ? voteProduct.getAutumn : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 29-->
+                                </div>
+
+                                <div class="col-xl-3">
+                                    <!--begin::Stats Widget 29-->
+                                    <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right; background-size: 100% auto; background-image: url(/assets/media/stock-600x400/img-29.jpg)">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="svg-icon svg-icon-2x svg-icon-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"></path>
+                                                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"></path>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="season" value="winter"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-2 d-block">Na zimę</span>
+                                            <span class="font-weight-bold font-size-h7 text-white"><span th:text="${voteProduct.getWinter != null ? voteProduct.getWinter : 0}"></span> głosów</span>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 29-->
+                                </div>
+                            </div>
+                            <!--end spring, summer, autumn, winter -->
+
+                            <!--begin day,night-->
+                            <div id="day-night-element" class="row">
+                                <div class="col-xl-6">
+                                    <!--begin::Stats Widget 29-->
+                                    <div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(/assets/media/svg/shapes/abstract-1.svg)">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span class="svg-icon svg-icon-black svg-icon-4x">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <path d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z" fill="#000000" fill-rule="nonzero"/>
+                                                                <path d="M19.5,10.5 L21,10.5 C21.8284271,10.5 22.5,11.1715729 22.5,12 C22.5,12.8284271 21.8284271,13.5 21,13.5 L19.5,13.5 C18.6715729,13.5 18,12.8284271 18,12 C18,11.1715729 18.6715729,10.5 19.5,10.5 Z M16.0606602,5.87132034 L17.1213203,4.81066017 C17.7071068,4.22487373 18.6568542,4.22487373 19.2426407,4.81066017 C19.8284271,5.39644661 19.8284271,6.34619408 19.2426407,6.93198052 L18.1819805,7.99264069 C17.5961941,8.57842712 16.6464466,8.57842712 16.0606602,7.99264069 C15.4748737,7.40685425 15.4748737,6.45710678 16.0606602,5.87132034 Z M16.0606602,18.1819805 C15.4748737,17.5961941 15.4748737,16.6464466 16.0606602,16.0606602 C16.6464466,15.4748737 17.5961941,15.4748737 18.1819805,16.0606602 L19.2426407,17.1213203 C19.8284271,17.7071068 19.8284271,18.6568542 19.2426407,19.2426407 C18.6568542,19.8284271 17.7071068,19.8284271 17.1213203,19.2426407 L16.0606602,18.1819805 Z M3,10.5 L4.5,10.5 C5.32842712,10.5 6,11.1715729 6,12 C6,12.8284271 5.32842712,13.5 4.5,13.5 L3,13.5 C2.17157288,13.5 1.5,12.8284271 1.5,12 C1.5,11.1715729 2.17157288,10.5 3,10.5 Z M12,1.5 C12.8284271,1.5 13.5,2.17157288 13.5,3 L13.5,4.5 C13.5,5.32842712 12.8284271,6 12,6 C11.1715729,6 10.5,5.32842712 10.5,4.5 L10.5,3 C10.5,2.17157288 11.1715729,1.5 12,1.5 Z M12,18 C12.8284271,18 13.5,18.6715729 13.5,19.5 L13.5,21 C13.5,21.8284271 12.8284271,22.5 12,22.5 C11.1715729,22.5 10.5,21.8284271 10.5,21 L10.5,19.5 C10.5,18.6715729 11.1715729,18 12,18 Z M4.81066017,4.81066017 C5.39644661,4.22487373 6.34619408,4.22487373 6.93198052,4.81066017 L7.99264069,5.87132034 C8.57842712,6.45710678 8.57842712,7.40685425 7.99264069,7.99264069 C7.40685425,8.57842712 6.45710678,8.57842712 5.87132034,7.99264069 L4.81066017,6.93198052 C4.22487373,6.34619408 4.22487373,5.39644661 4.81066017,4.81066017 Z M4.81066017,19.2426407 C4.22487373,18.6568542 4.22487373,17.7071068 4.81066017,17.1213203 L5.87132034,16.0606602 C6.45710678,15.4748737 7.40685425,15.4748737 7.99264069,16.0606602 C8.57842712,16.6464466 8.57842712,17.5961941 7.99264069,18.1819805 L6.93198052,19.2426407 C6.34619408,19.8284271 5.39644661,19.8284271 4.81066017,19.2426407 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-0 d-block">Na dzień</span>
+                                                    <span class="font-weight-bold text-muted font-size-sm"><span th:text="${voteProduct.getDay != null ? voteProduct.getDay : 0}"></span> głosów</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="daynight" value="day"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 29-->
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <!--begin::Stats Widget 32-->
+                                    <div class="card card-custom bg-dark card-stretch gutter-b">
+                                        <!--begin::Body-->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span class="svg-icon svg-icon-white svg-icon-4x">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"/>
+                                                                <path d="M12.0700837,4.0003006 C11.3895108,5.17692613 11,6.54297551 11,8 C11,12.3948932 14.5439081,15.9620623 18.9299163,15.9996994 C17.5467214,18.3910707 14.9612535,20 12,20 C7.581722,20 4,16.418278 4,12 C4,7.581722 7.581722,4 12,4 C12.0233848,4 12.0467462,4.00010034 12.0700837,4.0003006 Z" fill="#000000"/>
+                                                            </g>
+                                                        </svg><!--end::Svg Icon-->
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-0 text-hover-primary d-block">Na noc</span>
+                                                    <span class="font-weight-bold text-white  font-size-sm"><span th:text="${voteProduct.getNight != null ? voteProduct.getNight : 0}"></span> głosów</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <span class="switch switch-sm switch-dark">
+                                                        <label><input type="checkbox" name="daynight" value="night"><span></span></label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Stats Widget 32-->
+                                </div>
+                            </div>
+                            <!--end day,night-->
+
+                            <!--begin scent vote-->
+                            <div id="vote-scent" class="row">
+                                <div class="col-xl-4">
+                                    <!--begin::Base Table Widget 3-->
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0 pt-5">
+                                            <h3 class="card-title align-items-start flex-column">
+                                                <span class="card-label font-weight-bolder text-dark">Nuty bazy</span>
+                                                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                                            </h3>
+                                        </div>
+                                        <!--end::Header-->
+
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-2 pb-0">
+                                            <!--begin::Table-->
+                                            <div class="table">
+                                                <table class="table table-borderless table-vertical-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="p-0" style="width: 50px"></th>
+                                                        <th class="p-0" style="min-width: 150px"></th>
+                                                        <th class="p-0" style="min-width: 100px"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="baseNote : ${baseNote}">
+                                                        <td class="pl-0 py-5">
+                                                            <div class="symbol symbol-50 symbol-light-success">
+                                                                <span class="symbol-label">
+                                                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-23.jpg')"></div>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="pl-0">
+                                                            <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg" th:text="${baseNote.productNote.note.nameNote}"></a>
+                                                            <span class="text-muted font-weight-bold d-block"><span th:text="${baseNote.score != null ? baseNote.score : 0}"></span> głosów</span>
+                                                        </td>
+
+                                                        <td class="text-right pr-0">
+                                                            <div class="dropdown dropdown-inline">
+                                                                <a href="#" class="btn btn-success btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Głosuj
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-md dropdown-menu" style="">
+                                                                    <!--begin::Navigation-->
+                                                                    <ul class="navi navi-hover">
+                                                                        <li class="navi-header pb-1">
+                                                                            <span class="text-primary text-uppercase font-weight-bold font-size-sm">Intensywność:</span>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Bardzo intensywny (3)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; intensywny (2)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Wyczuwalny (1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Neutralny (0)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Nie istnieje (-1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <!--end::Navigation-->
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--end::table-->
+                                        </div>
+                                        <!--begin::Body-->
+                                    </div>
+                                    <!--end::Base Table Widget 3-->
+                                </div>
+                                <div class="col-xl-4">
+                                    <!--begin::Base Table Widget 3-->
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0 pt-5">
+                                            <h3 class="card-title align-items-start flex-column">
+                                                <span class="card-label font-weight-bolder text-dark">Nuty głowy</span>
+                                                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                                            </h3>
+                                        </div>
+                                        <!--end::Header-->
+
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-2 pb-0">
+                                            <!--begin::Table-->
+                                            <div class="table">
+                                                <table class="table table-borderless table-vertical-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="p-0" style="width: 50px"></th>
+                                                        <th class="p-0" style="min-width: 150px"></th>
+                                                        <th class="p-0" style="min-width: 100px"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="headNote : ${headNote}">
+                                                        <td class="pl-0 py-5">
+                                                            <div class="symbol symbol-50 symbol-light-success">
+                                                                <span class="symbol-label">
+                                                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-21.jpg')"></div>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="pl-0">
+                                                            <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg" th:text="${headNote.productNote.note.nameNote}">Active Customers</a>
+                                                            <span class="text-muted font-weight-bold d-block"><span th:text="${headNote.score != null ? headNote.score : 0}"></span> głosów</span>
+                                                        </td>
+
+                                                        <td class="text-right pr-0">
+                                                            <div class="dropdown dropdown-inline">
+                                                                <a href="#" class="btn btn-success btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Głosuj
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-md dropdown-menu" style="">
+                                                                    <!--begin::Navigation-->
+                                                                    <ul class="navi navi-hover">
+                                                                        <li class="navi-header pb-1">
+                                                                            <span class="text-primary text-uppercase font-weight-bold font-size-sm">Intensywność:</span>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Bardzo intensywny (3)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; intensywny (2)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Wyczuwalny (1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Neutralny (0)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Nie istnieje (-1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <!--end::Navigation-->
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--end::table-->
+                                        </div>
+                                        <!--begin::Body-->
+                                    </div>
+                                    <!--end::Base Table Widget 3-->
+                                </div>
+                                <div class="col-xl-4">
+                                    <!--begin::Base Table Widget 3-->
+                                    <div class="card card-custom card-stretch gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header border-0 pt-5">
+                                            <h3 class="card-title align-items-start flex-column">
+                                                <span class="card-label font-weight-bolder text-dark">Nuty serca</span>
+                                                <span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
+                                            </h3>
+                                        </div>
+                                        <!--end::Header-->
+
+                                        <!--begin::Body-->
+                                        <div class="card-body pt-2 pb-0">
+                                            <!--begin::Table-->
+                                            <div class="table">
+                                                <table class="table table-borderless table-vertical-center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="p-0" style="width: 50px"></th>
+                                                        <th class="p-0" style="min-width: 150px"></th>
+                                                        <th class="p-0" style="min-width: 100px"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="heartNote : ${heartNote}">
+                                                        <td class="pl-0 py-5">
+                                                            <div class="symbol symbol-50 symbol-light-success">
+                                                                <span class="symbol-label">
+                                                                    <div class="symbol-label" style="background-image: url('/assets/media/stock-600x400/img-22.jpg')"></div>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="pl-0">
+                                                            <a href="#" class="text-dark text-hover-primary mb-1 font-size-lg" th:text="${heartNote.productNote.note.NameNote}">Active Customers</a>
+                                                            <span class="text-muted font-weight-bold d-block"><span th:text="${heartNote.score != null ? heartNote.score : 0}"></span> głosów</span>
+                                                        </td>
+
+                                                        <td class="text-right pr-0">
+                                                            <div class="dropdown dropdown-inline">
+                                                                <a href="#" class="btn btn-success btn-md py-2 font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Głosuj
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-md dropdown-menu" style="">
+                                                                    <!--begin::Navigation-->
+                                                                    <ul class="navi navi-hover">
+                                                                        <li class="navi-header pb-1">
+                                                                            <span class="text-primary text-uppercase font-weight-bold font-size-sm">Intensywność:</span>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Bardzo intensywny (3)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; intensywny (2)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Wyczuwalny (1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Neutralny (0)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="navi-item">
+                                                                            <a href="#" class="navi-link">
+                                                                                <label class="radio radio-outline radio-outline-2x radio-primary">
+                                                                                    <input type="radio" name="radios16">
+                                                                                    <span></span>
+                                                                                    &nbsp; Nie istnieje (-1)
+                                                                                </label>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <!--end::Navigation-->
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--end::table-->
+                                        </div>
+                                        <!--begin::Body-->
+                                    </div>
+                                    <!--end::Base Table Widget 3-->
+                                </div>
+                            </div>
+                            <!--end scent vote2-->
+
+                            <!--begin comments user-->
+                            <div id="comments-user" class="row">
+                                <div class="col-xl-12">
+                                    <!--begin::Card-->
+                                    <div class="card card-custom gutter-b">
+                                        <!--begin::Header-->
+                                        <div class="card-header card-header-tabs-line">
+
+                                            <div class="card-toolbar pt-10">
+                                                <h2>Opinie użytkowników</h2>
+
+                                            </div>
+                                        </div>
+                                        <!--end::Header-->
+
+                                        <!--begin::Body-->
+                                        <div class="card-body px-0">
+                                            <div class="tab-content pt-5">
+                                                <!--begin::Tab Content-->
+                                                <div class="tab-pane active" id="kt_apps_contacts_view_tab_1" role="tabpanel">
+                                                    <div class="container">
+                                                        <form class="form">
+                                                            <div class="form-group">
+                                                                <textarea class="form-control form-control-lg form-control-solid" id="exampleTextarea" rows="5" placeholder="Twoja opinia o producie"></textarea>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#" class="btn btn-primary font-weight-bold">Dodaj komentarz</a>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+                                                        <div class="separator separator-dashed my-5"></div>
+
+                                                        <!--begin::Timeline-->
+                                                        <div class="timeline timeline-3">
+                                                            <div class="timeline-items" th:each="comment : ${product.comments}">
+                                                                <div class="timeline-item">
+                                                                    <div class="timeline-media"><img alt="Pic" src="/assets/media/users/300_25.jpg"></div>
+                                                                    <div class="timeline-content">
+                                                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                                                            <div class="mr-2">
+                                                                                <a href="#" class="text-dark-75 text-hover-primary font-weight-bold" th:text="${comment.user.login}"></a>
+                                                                                <span class="text-muted ml-2" th:text="${#dates.format(comment.dataReview, 'yyyy-MM-dd HH:mm')}"></span>
+                                                                                <span class="label label-light-success font-weight-bolder label-inline ml-2" th:text="${comment.score}"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="p-0" th:text="${comment.textReview}"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Timeline-->
+                                                    </div>
+                                                </div>
+                                                <!--end::Tab Content-->
+
+                                            </div>
+                                        </div>
+                                        <!--end::Body-->
+                                    </div>
+                                    <!--end::Card-->
+                                </div>
+                            </div>
+                            <!--end comments user-->
+                        </div>
+                        <!--end::Container-->
+                    </div>
+                    <!--end::Entry-->
+
+                </div>
+                <!--end::Content-->
+                <div th:insert="fragments/footer.html :: footer"></div>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Main-->
+
+    <!-- begin::User Panel-->
+    <div th:insert="fragments/user-panel.html :: user-panel"></div>
+    <!-- end::User Panel-->
+
+    <!--begin::Scrolltop-->
+    <div th:insert="fragments/scrolltop.html :: scrolltop"></div>
+    <!--end::Scrolltop-->
+
+    <th:block th:insert="fragments/scripts.html :: scripts"></th:block>
+</body>
+<!--end::Body-->
+</html>

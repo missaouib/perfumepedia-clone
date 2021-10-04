@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Strony</title>
+  <link href="/fontawesome/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="alert alert-success" th:text="${infoSuccess}" th:if="${infoSuccess}"></div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Edycja</th>
+      <th scope="col">Kasowanie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="itemPage : ${textPages.page}">
+      <th th:text="${itemPage.idPage}"></th>
+      <td th:text="${itemPage.pageName}"></td>
+      <td>Edytuj</td>
+      <td>Usuń</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation" class="paging">
+    <ul class="pagination" th:if="${textPages.page.totalPages > 1}">
+      <li class="page-item" th:classappend="${!textPages.paging.isPrevEnabled()? 'disabled' : ''}">
+        <a class="page-link" th:href="@{'/pages?pageNumber=' + ${textPages.paging.pageNumber - 1}}"
+           tabindex="-1">Previous</a>
+      </li>
+      <th:block th:each="item : ${textPages.paging.getItems()}">
+        <li class="page-item" th:classappend="${item.index == textPages.paging.pageNumber? 'active' : ''}"
+            th:if="${item.pageItemType.name() == 'PAGE'}">
+          <a class="page-link" th:href="@{'/pages?pageNumber=' + ${item.index}}"
+             th:text="${item.index}"></a>
+        </li>
+        <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+          <a class="page-link" href="#">...</a>
+        </li>
+      </th:block>
+      <li class="page-item" th:classappend="${!textPages.paging.isNextEnabled()? 'disabled' : ''}">
+        <a class="page-link" th:href="@{'/pages?pageNumber=' + ${textPages.paging.pageNumber + 1}}">Next</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Dodaj stronę</title>
+  <link href="/fontawesome/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <form action="#" th:action="@{/addpage}" th:object="${page}" method="post">
+    <table>
+      <tr>
+        <td>Nazwa strony:</td>
+        <td><input type="text" th:field="*{pageName}" /></td>
+        <td th:if="${#fields.hasErrors('pageName')}" th:errors="*{pageName}">Name Error</td>
+      </tr>
+      <tr>
+        <td>Treść:</td>
+        <td><input type="text" th:field="*{pageContent}" /></td>
+        <td th:if="${#fields.hasErrors('pageContent')}" th:errors="*{pageContent}">Age Error</td>
+      </tr>
+      <tr>
+        <td>Tytuł:</td>
+        <td><input type="text" th:field="*{pageTitle}" /></td>
+        <td th:if="${#fields.hasErrors('pageTitle')}" th:errors="*{pageTitle}">Age Error</td>
+      </tr>
+      <tr>
+        <td><button type="submit">Submit</button></td>
+      </tr>
+    </table>
+  </form>
+
+</div>
+</body>
+</html>

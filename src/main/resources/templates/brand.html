@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Brands</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 mt-5 mb-5">
+            <h2 th:text="${brand.nameBrand}"></h2>
+            <p th:text="${brand.descriptionBrand}"></p>
+        </div>
+    </div>
+
+    <ul th:each="products : ${products}">
+        <li th:text="${products.productName} + '- ' + ${products.brand.nameBrand}"></li>
+    </ul>
+</div>
+@Wojtek
+</body>
+</html>
